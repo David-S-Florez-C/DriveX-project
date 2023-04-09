@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.drivex.springdrivexproject.SpringDrivexProjectApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.44 s - in com.drivex.springdrivexproject.SpringDrivexProjectApplicationTests
