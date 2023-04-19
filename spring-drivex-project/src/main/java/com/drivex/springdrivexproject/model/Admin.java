@@ -18,16 +18,19 @@ import javax.persistence.*;
 @Table(name = "Admin")
 @Entity
 public class Admin {
-
-        // Columns
-    @Column(length = 45)
-    private String email;
-    @Column(length = 45)
-    private String password;
-    private  byte age;
-
+        // Table
+    //Primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_admin")
     private int idAdmin;
+
+    //Columns
+    @Column(length = 45)
+    private String email;
+
+    @Column(length = 45)
+    private String password;
+
+    private  byte age;
 }

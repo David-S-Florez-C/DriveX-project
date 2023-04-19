@@ -17,12 +17,13 @@ import javax.persistence.*;
 @Table(name = "Score")
 @Entity
 public class Score {
-
-        // Columns
-    private int stars;
-
+        // Table
+    // Primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_score")
     private int idScore;
+
+    // Columns
+    private int stars;
 }

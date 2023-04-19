@@ -20,8 +20,14 @@ import java.util.Date;
 @Table(name = "Reservation")
 @Entity
 public class Reservation {
+        // Table
+    // Primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_reservation")
+    private int idReservation;
 
-        // Columns
+    // Columns
     @Column(name = "start_date")
     private Date startDate;
 
@@ -30,6 +36,7 @@ public class Reservation {
 
     private String status = "created";
 
+    // Foreign key
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_car", nullable = false)
     @JsonIgnoreProperties({"reservations"})
@@ -43,9 +50,4 @@ public class Reservation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_score", unique = true)
     private Score score;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_reservation")
-    private int idReservation;
 }

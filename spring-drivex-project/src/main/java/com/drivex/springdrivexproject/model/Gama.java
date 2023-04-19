@@ -20,8 +20,14 @@ import java.util.List;
 @Table(name = "Gama")
 @Entity
 public class Gama {
+        // Table
+    // Primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_gama")
+    private int idGama;
 
-        // Columns
+    // Columns
     @Column(length = 45)
     private String name;
 
@@ -30,9 +36,4 @@ public class Gama {
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "gama")
     private List<Car> cars;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_gama")
-    private int idGama;
 }

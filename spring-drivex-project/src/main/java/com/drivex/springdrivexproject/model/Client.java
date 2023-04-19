@@ -17,8 +17,13 @@ import java.util.List;
 @Table(name = "Client")
 @Entity
 public class Client {
-
-        // Columns
+        // Table
+    // Primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_client")
+    private int idClient;
+    // Columns
     @Column(length = 250)
     private String name;
 
@@ -31,14 +36,10 @@ public class Client {
     @Column(length = 3)
     private byte age;
 
+    // Foreign keys
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "client")
     private List<Message> messages;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "client")
     private List<Reservation> reservations;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_client")
-    private int idClient;
 }

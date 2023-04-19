@@ -19,10 +19,18 @@ import javax.persistence.*;
 @Entity
 public class Message {
 
-        // Columns
+        // Table
+    // Primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_message")
+    private int idMessage;
+
+    // Columns
     @Column(name = "message_text",length = 250)
     private String messageText;
 
+    // Foreign keys
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_car", nullable = false)
     @JsonIgnoreProperties({"messages","reservations"})
@@ -32,9 +40,4 @@ public class Message {
     @JoinColumn(name = "id_client", nullable = false)
     @JsonIgnoreProperties({"messages","reservations"})
     private Client client;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_message")
-    private int idMessage;
 }

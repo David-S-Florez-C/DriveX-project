@@ -21,18 +21,27 @@ import java.util.List;
 @Table(name = "Car")
 @Entity
 public class Car {
+        // Table
+    // Primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_car")
+    private int idCar;
 
-        // Columns
+    //Columns
     @Column(length = 45)
     private String name;
+
     @Column(length = 45)
     private String brand;
+
     @Column(length = 4, name = "year_car")
     private int year;
 
     @Column(length = 250)
     private String description;
 
+    // Foreign keys
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_gama", nullable = false)
     @JsonIgnoreProperties("cars")
@@ -44,9 +53,4 @@ public class Car {
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "car")
     private List<Reservation> reservations;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_car")
-    private int idCar;
 }
