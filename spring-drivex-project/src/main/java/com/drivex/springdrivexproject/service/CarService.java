@@ -42,13 +42,13 @@ public class CarService {
     {
         Car carProvider = carRepository.findById(idCar).orElseThrow(ResourceNotFoundException::new);
         carProvider.setBrand(car.getBrand());
-        carProvider.setModel(car.getModel());
-        carProvider.setCategory_id(car.getCategory_id());
+        carProvider.setYear(car.getYear());
+        carProvider.setGama(car.getGama());
 
-        Integer idCarProvider = car.getId();
+        Integer idCarProvider = car.getIdCar();
         carRepository.deleteById(idCarProvider);
 
-        carProvider.setId(idCarProvider);
+        carProvider.setIdCar(idCarProvider);
 
         carRepository.save(carProvider);
         return carProvider;

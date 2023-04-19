@@ -3,10 +3,12 @@ package com.drivex.springdrivexproject.model;
 
 // Imports
     // Lombok
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
     // Javax.persistence
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 // Annotations
 @AllArgsConstructor
@@ -16,13 +18,35 @@ import javax.persistence.Id;
 @ToString
 
 // Class
+@Table(name = "Car")
 @Entity
 public class Car {
 
         // Columns
+    @Column(length = 45)
+    private String name;
+    @Column(length = 45)
     private String brand;
-    private int model;
-    private int category_id;
+    @Column(length = 4, name = "year_car")
+    private int year;
+
+    @Column(length = 250)
+    private String description;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_gama", nullable = false)
+    @JsonIgnoreProperties("cars")
+    private Gama gama;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "car")
+    @JsonIgnoreProperties({"car","client"})
+    private List<Message> messages;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "car")
+    private List<Reservation> reservations;
+
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_car")
+    private int idCar;
 }

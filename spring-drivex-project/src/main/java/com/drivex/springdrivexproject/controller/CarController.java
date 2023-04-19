@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 // Class
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/api/Car")
 public class CarController {
     // Attributes
     @Autowired
