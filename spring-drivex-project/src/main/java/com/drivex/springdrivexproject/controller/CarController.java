@@ -26,7 +26,7 @@ public class CarController {
 
     // Methods-Mapping
         // Get
-    @GetMapping("/list")
+    @GetMapping("/all")
     public ResponseEntity<List<Car>> listAllCar()
     {
         return ResponseEntity.ok(carService.getAll());

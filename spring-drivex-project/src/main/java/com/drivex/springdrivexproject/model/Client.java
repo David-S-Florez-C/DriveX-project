@@ -24,14 +24,14 @@ public class Client {
     @Column(name = "id_client")
     private int idClient;
     // Columns
-    @Column(length = 250)
-    private String name;
-
     @Column(length = 45)
     private String email;
 
     @Column(length = 45)
     private String password;
+
+    @Column(length = 250)
+    private String name;
 
     @Column(length = 3)
     private byte age;
