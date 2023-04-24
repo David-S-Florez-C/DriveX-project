@@ -14,8 +14,6 @@ import lombok.*;
 
 // Class
 public class ScoreDbo {
-    private float value;
+    private Integer stars;
     private int idScore;
-    private Reservation reservation;
 }
-

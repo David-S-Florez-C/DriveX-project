@@ -6,13 +6,18 @@ package com.drivex.springdrivexproject.service;
 import java.util.List;
 import java.util.Optional;
 // Model
+import com.drivex.springdrivexproject.dbo.CarDbo;
+import com.drivex.springdrivexproject.dbo.GamaDbo;
 import com.drivex.springdrivexproject.exception.ResourceNotFoundException;
 import com.drivex.springdrivexproject.model.Car;
     // Spring.beans
+import com.drivex.springdrivexproject.model.Gama;
 import com.drivex.springdrivexproject.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
     // Spring.stereotype
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 // Annotations
 
@@ -54,15 +59,51 @@ public class CarService {
         return carProvider;
     }
 
-        // Delete a Car
-    public String deleteCar(Integer idCar) {
-        String message = " ";
-        try{
-            carRepository.deleteById(idCar);
-            message = "Successful request: Eliminated car";
-        }catch (Exception exception){
-            message = "Unsuccessful request:  An error occurred when eliminating the car";
+    // Update Gama
+    public boolean patchCar(CarDbo car) {
+        Optional<Car> optionalCar = carRepository.findById(car.getIdCar());
+        if(optionalCar.isPresent()){
+            Car carProvider = optionalCar.get();
+
+            if(car.getBrand() != null){
+                carProvider.setBrand(car.getBrand());
+            }
+            if(car.getName() != null){
+                carProvider.setName(car.getName());
+            }
+            if(car.getDescription() != null){
+                carProvider.setDescription(car.getDescription());
+            }
+            if(car.getYear() != null){
+                carProvider.setYear(car.getYear());
+            }
+            if(car.getMessages() != null){
+                carProvider.setMessages(car.getMessages());
+            }
+            if (car.getGama() != null){
+                carProvider.setGama(car.getGama());
+            }
+            if (car.getReservations() != null){
+                carProvider.setReservations(car.getReservations());
+            }
+            carRepository.save(carProvider);
+            return true;
+        } else {
+            throw new EntityNotFoundException("No se puede actualizar el objeto Example porque no existe en la base de datos.");
         }
-        return message;
+    }
+
+        // Delete a Car
+    public boolean deleteCar(Integer idCar) {
+        Optional<Car> optionalCar = carRepository.findById(idCar);
+
+        if (optionalCar.isPresent())
+        {
+            Car car = optionalCar.get();
+            carRepository.deleteById(car.getIdCar());
+            return true;
+        }else {
+            return false;
+        }
     }
 }

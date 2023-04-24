@@ -37,4 +37,17 @@ public class AdminController {
     {
         return new ResponseEntity<>(adminService.save(admin), HttpStatus.CREATED);
     }
+
+        // Delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAdmin(@PathVariable Integer id) // You could write "String" instead of "Void"
+    {
+        boolean deleted = adminService.deleteAdmin(id);
+
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -3,6 +3,8 @@ package com.drivex.springdrivexproject.controller;
 
 // Imports
 // Model
+import com.drivex.springdrivexproject.dbo.GamaDbo;
+import com.drivex.springdrivexproject.dbo.ScoreDbo;
 import com.drivex.springdrivexproject.model.Score;
 // Service
 import com.drivex.springdrivexproject.service.ScoreService;
@@ -36,5 +38,31 @@ public class ScoreController {
     public ResponseEntity<Score> saveScore(@RequestBody Score score)
     {
         return new ResponseEntity<>(scoreService.save(score), HttpStatus.CREATED);
+    }
+
+    // Patch but for the challenge is Update
+    @PatchMapping("/update")
+    public ResponseEntity<Void> patchScore(@RequestBody ScoreDbo score)
+    {
+        boolean patched = scoreService.patchScore(score);
+
+        if(patched){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteScore(@PathVariable Integer id) // You could write "String" instead of "Void"
+    {
+        boolean deleted = scoreService.deleteScore(id);
+
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

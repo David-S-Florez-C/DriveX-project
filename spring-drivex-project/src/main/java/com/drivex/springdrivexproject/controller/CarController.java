@@ -5,6 +5,8 @@ package com.drivex.springdrivexproject.controller;
     // Jva.util
 import java.util.List;
     // Model.Service
+import com.drivex.springdrivexproject.dbo.CarDbo;
+import com.drivex.springdrivexproject.dbo.GamaDbo;
 import com.drivex.springdrivexproject.model.Car;
 import com.drivex.springdrivexproject.service.CarService;
     // Spring.beans
@@ -45,25 +47,29 @@ public class CarController {
         return new ResponseEntity<>(carService.save(car), HttpStatus.CREATED);
     }
 
-        // Put
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable("id") Integer idCar, @RequestBody Car car)
+    // Patch but for the challenge is Update
+    @PatchMapping("/update")
+    public ResponseEntity<Void> patchCar(@RequestBody CarDbo car)
     {
-        return new ResponseEntity<>(carService.updateCar(car, idCar), HttpStatus.OK);
+        boolean patched = carService.patchCar(car);
+
+        if(patched){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
         // Delete
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCar(@PathVariable Integer idCar)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Integer id) // You could write "String" instead of "Void"
     {
-        ResponseEntity<String> response = null;
-        if(carService.deleteCar(idCar) != null)
-        {
-            response = ResponseEntity.ok("Car with ID: " + idCar + ", correctly Delete");
-        } else
-        {
-            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fatal Error");
+        boolean deleted = carService.deleteCar(id);
+
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
         }
-        return response;
     }
 }
