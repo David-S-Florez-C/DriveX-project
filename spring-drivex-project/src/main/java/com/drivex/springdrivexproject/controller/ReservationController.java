@@ -42,7 +42,7 @@ public class ReservationController {
     }
 
     // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchReservation(@RequestBody ReservationDbo reservation)
     {
         boolean patched = reservationService.patchReservation(reservation);

@@ -41,7 +41,7 @@ public class ScoreController {
     }
 
     // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchScore(@RequestBody ScoreDbo score)
     {
         boolean patched = scoreService.patchScore(score);

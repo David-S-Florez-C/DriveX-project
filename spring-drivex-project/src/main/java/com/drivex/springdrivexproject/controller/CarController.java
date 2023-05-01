@@ -48,7 +48,7 @@ public class CarController {
     }
 
     // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchCar(@RequestBody CarDbo car)
     {
         boolean patched = carService.patchCar(car);

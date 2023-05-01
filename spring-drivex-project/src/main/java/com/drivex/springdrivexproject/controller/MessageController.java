@@ -41,7 +41,7 @@ public class MessageController {
     }
 
     // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchMessage(@RequestBody MessageDbo message)
     {
         boolean patched = messageService.patchMessage(message);

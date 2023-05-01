@@ -40,7 +40,7 @@ public class GamaController {
     }
 
         // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchGama(@RequestBody GamaDbo gama)
     {
         boolean patched = gamaService.patchGama(gama);

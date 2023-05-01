@@ -41,7 +41,7 @@ public class ClientController {
     }
 
     // Patch but for the challenge is Update
-    @PatchMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> patchClient(@RequestBody ClientDbo client)
     {
         boolean patched = clientService.patchClient(client);
